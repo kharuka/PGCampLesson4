@@ -24,6 +24,10 @@ if($status==false){
     $view .= '<a href="u_view.php?id='.$result["id"].'">';
     $view .= $result["indate"].":".$result["name"];
     $view .= '</a>';
+    $view .= ' ';
+    $view .= '<a href="delete.php?id='.$result["id"].'">';
+    $view .= ' [削除] ';
+    $view .= '</a>';
     $view .= '</p>';
   }
 }

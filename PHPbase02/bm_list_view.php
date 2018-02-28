@@ -24,6 +24,10 @@ if($status==false){
     $view .= '<a href="bm_update_view.php?id='.$result["id"].'">';
     $view .= $result["bmdate"].",".$result["name"].",".$result["email"].",".$result["bmname"].",".$result["url"];
     $view .= '</a>';
+    $view .= ' ';
+    $view .= '<a href="bm_delete.php?id='.$result["id"].'">';
+    $view .= ' [削除] ';
+    $view .= '</a>';
     $view .= '</p>';
   }
 }
