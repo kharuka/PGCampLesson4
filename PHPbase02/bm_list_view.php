@@ -21,7 +21,9 @@ if($status==false){
   // Selectデータの数だけ自動でループしてくれる
   while($result=$stmt->fetch(PDO::FETCH_ASSOC)){
     $view .= '<p>';
-    $view .= $result["bmdate"].",".$result["bmname"].",".$result["url"];
+    $view .= '<a href="bm_update_view.php?id='.$result["id"].'">';
+    $view .= $result["bmdate"].",".$result["name"].",".$result["email"].",".$result["bmname"].",".$result["url"];
+    $view .= '</a>';
     $view .= '</p>';
   }
 }

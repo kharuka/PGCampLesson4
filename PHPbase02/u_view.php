@@ -17,7 +17,7 @@ $stmt->bindValue(':id',$id,PDO::PARAM_INT);
 $status = $stmt->execute();
 
 // 3.データ表示
-$view="<p>id:name</p>";
+$view="";
 if($status==false){
   $error=$stmt->errorInfo();
   exit("ErrorQuery:".$error[2]);
