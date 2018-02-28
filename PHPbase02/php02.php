@@ -26,6 +26,9 @@
 
   <div class="header-block"></div>
 
+<!-- title -->
+<h1>ブックマークアプリ</h1>
+
 <!-- main -->
 <div class="main-box">
   <form action="insert.php" method="post">

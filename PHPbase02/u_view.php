@@ -1,5 +1,8 @@
 <?php
 
+$id=$_GET["id"];
+// echo "GET: ".$id;
+
 // 1. DB接続します（エラー処理追加）
 try{
   $pdo=new PDO('mysql:dbname=gs_db;charset=utf8;host=localhost','root','');
@@ -7,25 +10,20 @@ try{
   exit('DbConnectError:'.$e->getMessage());
 }
 
-// 2.データ表示SQL作成
-$sql="SELECT * FROM gs_an_table";
+// 2.データ取得SQL作成
+$sql="SELECT * FROM gs_an_table WHERE id=:id";
 $stmt=$pdo->prepare($sql);
+$stmt->bindValue(':id',$id,PDO::PARAM_INT);
 $status = $stmt->execute();
 
 // 3.データ表示
-$view="<p>indate:name</p>";
+$view="<p>id:name</p>";
 if($status==false){
   $error=$stmt->errorInfo();
   exit("ErrorQuery:".$error[2]);
 }else{
-  // Selectデータの数だけ自動でループしてくれる
-  while($result=$stmt->fetch(PDO::FETCH_ASSOC)){
-    $view .= '<p>';
-    $view .= '<a href="u_view.php?id='.$result["id"].'">';
-    $view .= $result["indate"].":".$result["name"];
-    $view .= '</a>';
-    $view .= '</p>';
-  }
+  // データのみ抽出の場合はwhileループで取り出さない
+  $row=$stmt->fetch();
 }
 
  ?>
@@ -63,15 +61,27 @@ if($status==false){
 
  <!-- main -->
  <div class="main-box">
+   <form action="update.php" method="post">
+     <div class="jumbatron">
+       <fieldset>
+         <legend>フリーアンケート</legend>
+         <label>名前：<input type="text" name="name" value="<?=$row["name"]?>" required></input></label><br>
+         <label>Email：<input type="email" name="email" value="<?=$row["email"]?>" required></input></label><br>
+         <label><textarea name="naiyou" row="4" cols="40"><?=$row["naiyou"]?></textarea></label><br>
+         <input type="hidden" name="id" value="<?=$row["id"]?>">
 
-   <!-- select -->
-   <h2>データ表示</h2>
-   <div class="view-box">
-     <div class="view-subbox">
-       <?=$view?>
+         <!-- button -->
+         <div class="button-box">
+           <div class="submit-box">
+             <p><input type="submit" name="submit" value="送信" class="button"></p>
+           </div>
+           <div class="reset-box">
+             <p><input type="reset" name="reset" value="リセット" class="button"></p>
+           </div>
+         </div>
+       </fieldset>
      </div>
-   </div>
-
+   </form>
  </div>
 
  <!-- footer -->
