@@ -27,12 +27,27 @@ body {
 }
 
 /* title */
+h1{
+  text-align: center;
+}
 
 /* main */
+h2{
+  text-align: center;
+}
+
 .main-box{
   background-color: #fafafa;
   margin-top: 30px;
   margin-bottom: 30px;
+}
+
+.form-box{
+  display: flex;
+  justify-content: center;
+}
+
+.view-box{
   display: flex;
   justify-content: center;
 }
